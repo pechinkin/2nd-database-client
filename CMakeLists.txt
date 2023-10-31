@@ -1,1 +1,1 @@
-add_executable(my_program main.cpp)
+add_executable(a main.cpp src/sign.cpp)

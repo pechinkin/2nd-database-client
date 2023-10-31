@@ -1,7 +1,7 @@
 #include <iostream>
+#include "include/sign.hpp"
 
 int main()
 {
-    std::cout << "That is a second task" << std::endl;
     return 0;
 }

@@ -5,16 +5,23 @@ void Sign::SetYear (int _y)
 {
     year = _y;
 }
-
 void Sign::SetMonth (int _m)
 {
     month = _m;
 }
-
 void Sign::SetDay (int _d)
 {
     day = _d;
 }
+void Sign::SetName (string _name)
+{
+    name = _name;
+}
+void Sign::SetSurname (string _surname)
+{
+    surname = _surname;
+}
+
 
 int Sign::GetDay() const
 {
@@ -32,9 +39,18 @@ ZodiacSign Sign::GetZodiacSign() const
 {
     return sign;
 }
+string Sign::GetName() const
+{
+    return name;
+}
+string Sign::GetSurname() const
+{
+    return surname;
+}
 
 std::ostream& operator<<(std::ostream& output, const Sign* example_sign) {
-    output << example_sign->GetDay() << '.' << example_sign->GetMonth() << '.' << example_sign->GetYear() << std::endl;
+    output << example_sign->GetDay() << '.' << example_sign->GetMonth() << '.' << example_sign->GetYear()
+    << ' ' << example_sign->GetName()  << ' ' << example_sign->GetSurname() << std::endl;
     return output;
 }
 
@@ -44,6 +60,8 @@ Sign::Sign()
     SetMonth(1);
     SetYear(1970);
     SetZodiacSign();
+    SetName("no name");
+    SetSurname("no surname");
 }
 
 Sign::Sign(Sign* another)
@@ -52,9 +70,11 @@ Sign::Sign(Sign* another)
     SetMonth(another->GetMonth());
     SetYear(another->GetYear());
     SetZodiacSign();
+    SetName(another->GetName());
+    SetSurname(another->GetSurname());
 }
 
-Sign::Sign(int _d, int _m, int _y)
+Sign::Sign(int _d, int _m, int _y, string _name, string _surname)
 {
     try {
         if (_y >= 1920 && _y <=2023)
@@ -80,6 +100,8 @@ Sign::Sign(int _d, int _m, int _y)
         else
             throw std::logic_error("Invalid day");
         SetZodiacSign();
+        SetName(_name);
+        SetSurname(_surname);
     }
     catch (const std::logic_error& ex) {std::cout << "Logic_error: " << ex.what() << std::endl;}
 }

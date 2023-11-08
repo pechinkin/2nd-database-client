@@ -3,7 +3,7 @@
 
 int main()
 {
-    Sign *me = new Sign(19, 3, 1999);
+    Sign *me = new Sign(19, 3, 1999, "n", "s");
     std::cout << me;
     
     Sign *freee = new Sign();

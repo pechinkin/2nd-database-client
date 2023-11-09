@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/sign.hpp"
+#include <sign.hpp>
 
 void Sign::SetYear (int _y)
 {
@@ -50,7 +50,7 @@ string Sign::GetSurname() const
 
 std::ostream& operator<<(std::ostream& output, const Sign* example_sign) {
     output << example_sign->GetDay() << '.' << example_sign->GetMonth() << '.' << example_sign->GetYear()
-    << ' ' << example_sign->GetName()  << ' ' << example_sign->GetSurname() << std::endl;
+    << '[' << example_sign->GetZodiacSign() << ']' << example_sign->GetName()  << ' ' << example_sign->GetSurname() << std::endl;
     return output;
 }
 
@@ -60,8 +60,8 @@ Sign::Sign()
     SetMonth(1);
     SetYear(1970);
     SetZodiacSign();
-    SetName("no name");
-    SetSurname("no surname");
+    SetName("no_name");
+    SetSurname("no_surname");
 }
 
 Sign::Sign(Sign* another)

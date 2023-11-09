@@ -1,3 +1,5 @@
+#ifndef SIGN_H
+#define SIGN_H
 enum ZodiacSign {
     Aries,
     Taurus,
@@ -39,3 +41,4 @@ public:
     Sign(int _d, int _m, int _y, string _name, string _surname);
     Sign(Sign* another);
 };
+#endif

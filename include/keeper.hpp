@@ -10,7 +10,7 @@ public:
     Keeper();
     ~Keeper();
     void AddElement();
-//    void DeleteElment();
+    void DeleteElement();
 //    void ChangeElement();
 //    void CopyElement();
 //    void Sort();
@@ -18,4 +18,4 @@ public:
     void ShowAll();
 };
 
-#endif 
+#endif

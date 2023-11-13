@@ -28,12 +28,39 @@ void Keeper::AddElement()
     delete[] base;
     base = temp_base;
     size++;
+    std::cout << "[added]" << std::endl;
+}
+
+void Keeper::DeleteElement()
+{
+    int num;
+    if (size == 0) {
+        throw std::logic_error("nothing to delete");
+    }
+    std::cout << "what do you want to delete?" << std::endl;
+    ShowAll();
+    if ((std::cin >> num) && (num >= 0) && (num <= size))
+    {
+        Sign** temp_base = new Sign*[size--];
+        for (int i = 0; i != num; i++) {
+            temp_base[i] = base [i];
+        }
+        for (int i = num + 1; i <= size; i++) {
+            temp_base[i - 1] = base [i];
+        }
+        delete[] base;
+        base = temp_base;
+        std::cout << "[deleted]" << std::endl;
+    }
+    else
+        throw std::logic_error("invalid number of element");
+
 }
 
 void Keeper::ShowAll()
 {
     for (int i  = 0; i != size; i++) {
-        std::cout << base[i];
+        std::cout << '#' << i << ' '<< base[i];
     }
 }
 

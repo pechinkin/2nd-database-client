@@ -22,9 +22,36 @@ void Keeper::AddElement()
     }
     Sign** temp_base = new Sign*[size + 1];
     for (int i = 0; i != size; i++) {
-        temp_base[i] = base [i];
+        temp_base[i] = base[i];
     }
     temp_base[size] = new_elem;
+    delete[] base;
+    base = temp_base;
+    size++;
+    std::cout << "[added]" << std::endl;
+}
+
+void Keeper::AddElement(int _day, int _month, int _year)
+{
+    int counter = 0, last = 0;  //ADD COUNTER
+    Sign* new_elem = new Sign(_day, _month, _year, "a", "b");
+    
+    {
+        for (int i = 0; i != size; i++) {
+            if (_year >= base[i]->GetYear()) {
+                last = i + 1;
+            }
+        }
+    }
+    Sign** temp_base = new Sign*[size + 1];
+    for (int i = 0; i != last; i++) {
+        temp_base[i] = base[i];
+    }
+    temp_base[last] = new_elem;
+    for (int i = last; i != size; i++) {
+        temp_base[i + 1] = base [i];
+    }
+    
     delete[] base;
     base = temp_base;
     size++;

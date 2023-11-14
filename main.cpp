@@ -6,12 +6,10 @@ int main()
 {
     Keeper example_keeper;
     try {
-        for (int i = 0; i != 12; i++) {
-            example_keeper.AddElement();
-        }
-        example_keeper.ShowAll();
-        example_keeper.DeleteElement();
-        std::cout << std::endl;
+        example_keeper.AddElement(14, 5, 2001);
+        example_keeper.AddElement(2, 2, 1971);
+        example_keeper.AddElement(23, 12, 1991);
+        example_keeper.AddElement(14, 5, 1981);
         example_keeper.ShowAll();
     } catch (const std::logic_error& ex) {std::cout << "Logic_error: " << ex.what() << std::endl;}
 

@@ -10,6 +10,7 @@ public:
     Keeper();
     ~Keeper();
     void AddElement();
+    void AddElement(int _day, int _month, int _year);
     void DeleteElement();
 //    void ChangeElement();
 //    void CopyElement();

@@ -10,13 +10,13 @@ public:
     Keeper();
     ~Keeper();
     void AddElement();
-    void AddElement(int _day, int _month, int _year);
+    void AddElement(int _day, int _month, int _year, string _name, string _surname);
     void DeleteElement();
-//    void ChangeElement();
-//    void CopyElement();
-//    void Sort();
+    void CopyElement();
     void ShowBySign();
     void ShowAll();
+    
+    void Menu();
 };
 
 #endif

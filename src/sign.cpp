@@ -74,7 +74,7 @@ Sign::Sign(Sign* another)
     SetSurname(another->GetSurname());
 }
 
-Sign::Sign(int _d, int _m, int _y, string _name, string _surname)
+Sign::Sign(int _d, int _m, int _y, string _name, string _surname): Sign()
 {
     try {
         if (_y >= 1920 && _y <=2023)

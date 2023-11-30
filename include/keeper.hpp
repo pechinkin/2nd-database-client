@@ -6,13 +6,16 @@ class Keeper
 private:
     Sign **base = nullptr;
     int size;
+    void DeleteElementPrivate(int num);
+    
 public:
     Keeper();
     ~Keeper();
     void AddElement();
-    void AddElement(int _day, int _month, int _year, string _name, string _surname);
+    void AddElement(Sign *temp_elem);
     void DeleteElement();
     void CopyElement();
+    void ChangeElement();
     void ShowBySign();
     void ShowAll();
     

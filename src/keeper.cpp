@@ -26,13 +26,16 @@ void Keeper::AddElement()
     std::cin >> month;
     std::cout << "Day: ";
     std::cin >> day;
-    AddElement(day, month, year, name, surname);
+    Sign *new_elem = new Sign(day, month, year, name, surname);
+    AddElement(new_elem);
+    std::cout << "[added]" << std::endl;
+
 }
 
-void Keeper::AddElement(int _day, int _month, int _year, string _name, string _surname)
+void Keeper::AddElement(Sign *temp_elem)
 {
     int counter = 0, last = 0;
-    Sign* new_elem = new Sign(_day, _month, _year, _name, _surname);
+    Sign* new_elem = new Sign(temp_elem);
     
     {
         for (int i = 0; i != size; i++) {
@@ -82,39 +85,111 @@ void Keeper::AddElement(int _day, int _month, int _year, string _name, string _s
     delete[] base;
     base = temp_base;
     size++;
-    std::cout << "[added]" << std::endl;
 }
 
 
 void Keeper::CopyElement()
 {
-    try {
-        if (size == 0) {
-            std::cout << "nothing to copy" << std::endl;
+    if (size == 0) {
+        std::cout << "[nothing to copy]" << std::endl;
+    }
+    else {
+        int w = 0;
+        ShowAll();
+        std::cout << "which do you want to copy?" << std::endl;
+        if (!(std::cin >> w) || (w < 0) || (w >= size)) {
+            throw std::logic_error("invalid number to copy");
         }
         else {
-            int w = 0;
-            ShowAll();
-            std::cout << "which do you want to copy?" << std::endl;
-            if (!(std::cin >> w) || (w < 0) || (w >= size)) {
-                throw std::logic_error("invalid number to copy");
-            }
-            else {
-                AddElement(base[w]->GetDay(), base[w]->GetMonth(), base[w]->GetYear(), base[w]->GetName(), base[w]->GetSurname());
-                std::cout << "[copied]" << std::endl;
-            }
-            }
-    }
-    catch (const std::logic_error& ex) {std::cout << "Logic_error: " << ex.what() << std::endl;}
-    
+            Sign *temp = new Sign(base[w]);
+            AddElement(temp);
+            std::cout << "[copied]" << std::endl;
+            delete temp;
+        }
+        }
 }
 
+void Keeper::ChangeElement()
+{
+    if (size == 0) {
+        std::cout << "[nothing to change]" << std::endl;
+    }
+    else {
+        int w = 0;
+        ShowAll();
+        std::cout << "which do you want to change?" << std::endl;
+        if (!(std::cin >> w) || (w < 0) || (w >= size)) {
+            throw std::logic_error("invalid number to copy");
+        }
+        else {
+            Sign *temp = new Sign(base[w]);
+            DeleteElementPrivate(w);
+            string name, surname;
+            int year, month, day;
+            int x = 0;
+            std::cout << "what do you want to change? \n1. year \n2. month \n3. day \n4. name \n5. surname \n";
+            std::cin >> x;
+            if (x < 0 || x > 5) {
+                throw std::logic_error("invalid number to change");
+            }
+            switch (x) {
+                case 1:
+                    std::cout << "enter a year: ";
+                    std::cin >> year;
+                    temp->SetYear(year);
+                    temp->SetZodiacSign();
+                    break;
+                case 2:
+                    std::cout << "enter a month: ";
+                    std::cin >> month;
+                    temp->SetMonth(month);
+                    temp->SetZodiacSign();
+                    break;
+                case 3:
+                    std::cout << "enter a day: ";
+                    std::cin >> day;
+                    temp->SetDay(day);
+                    temp->SetZodiacSign();
+                    break;
+                case 4:
+                    std::cout << "enter a name: ";
+                    std::cin >> name;
+                    temp->SetName(name);
+                    break;
+                case 5:
+                    std::cout << "enter a surname: ";
+                    std::cin >> surname;
+                    temp->SetSurname(surname);
+                    break;
+                    
+                default:
+                    break;
+            }
+            AddElement(temp);
+            std::cout << "[changed]" << std::endl;
+            delete temp;
+        }
+        }
+}
+
+void Keeper::DeleteElementPrivate(int num)
+{
+    Sign** temp_base = new Sign*[size--];
+    for (int i = 0; i != num; i++) {
+        temp_base[i] = base [i];
+    }
+    for (int i = num + 1; i <= size; i++) {
+        temp_base[i - 1] = base [i];
+    }
+    delete[] base;
+    base = temp_base;
+}
 
 void Keeper::DeleteElement()
 {
     int num;
     if (size == 0) {
-        std::cout << "nothing to delete" << std::endl;
+        std::cout << "[nothing to delete]" << std::endl;
     }
     std::cout << "what do you want to delete?" << std::endl;
     ShowAll();
@@ -139,7 +214,7 @@ void Keeper::DeleteElement()
 void Keeper::ShowAll()
 {
     if (size == 0) {
-        std::cout << "empty" << std::endl;
+        std::cout << "[empty]" << std::endl;
     }
     for (int i  = 0; i != size; i++) {
         std::cout << '#' << i << ' '<< base[i];
@@ -149,7 +224,7 @@ void Keeper::ShowAll()
 void Keeper::ShowBySign()
 {
     if (size == 0) {
-        std::cout << "nothing to show" << std::endl;
+        std::cout << "[nothing to show]" << std::endl;
         return;
     }
     int sign_num = 0, counter = 0;
@@ -163,16 +238,16 @@ void Keeper::ShowBySign()
             counter++;
         }
         if (counter == 0)
-            std::cout << "nothing to show" << std::endl;
+            std::cout << "[nothing to show]" << std::endl;
     }
 }
 
 void Keeper::Menu()
 {
     int w = 0;
-    while (w != 6) {
-        std::cout << "1. add \n2. delete \n3. copy \n4. show all \n5. show by sign \n6. quit \n";
-        if (!(std::cin >> w) || w > 6 || w < 1 )
+    while (w != 7) {
+        std::cout << "1. add \n2. delete \n3. copy \n4. change elem \n5. show all \n6. show by sign \n7. quit \n";
+        if (!(std::cin >> w) || w > 7 || w < 1 )
         {
             std::cout << "[incorrect. try again]" << std::endl;
             std::cin.clear();
@@ -192,12 +267,15 @@ void Keeper::Menu()
                         CopyElement();
                         break;
                     case 4:
-                        ShowAll();
+                        ChangeElement();
                         break;
                     case 5:
-                        ShowBySign();
+                        ShowAll();
                         break;
                     case 6:
+                        ShowBySign();
+                        break;
+                    case 7:
                         std::cout << "[quitting]" << std::endl;
                         break;
                         

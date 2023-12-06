@@ -33,7 +33,7 @@ public:
     
     int GetDay() const, GetMonth() const, GetYear() const;
     ZodiacSign GetZodiacSign() const;
-    string GetName() const, GetSurname() const;
+    string GetName() const, GetSurname() const, GetNameOfZodiacSign() const;
     
     friend std::ostream& operator<<(std::ostream& output, const Sign* example_sign);
     

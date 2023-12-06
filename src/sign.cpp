@@ -47,10 +47,53 @@ string Sign::GetSurname() const
 {
     return surname;
 }
+string Sign::GetNameOfZodiacSign() const
+{
+    switch (sign) {
+        case 0:
+            return "Aries";
+            break;
+        case 1:
+            return "Taurus";
+            break;
+        case 2:
+            return "Gemini";
+            break;
+        case 3:
+            return "Cancer";
+            break;
+        case 4:
+            return "Leo";
+            break;
+        case 5:
+            return "Virgo";
+            break;
+        case 6:
+            return "Libra";
+            break;
+        case 7:
+            return "Scorpio";
+            break;
+        case 8:
+            return "Sagittarius";
+            break;
+        case 9:
+            return "Capricorn";
+            break;
+        case 10:
+            return "Aquarius";
+            break;
+        case 11:
+            return "Pisces";
+            break;
+        default:
+            break;
+    }
+}
 
 std::ostream& operator<<(std::ostream& output, const Sign* example_sign) {
     output << example_sign->GetDay() << '.' << example_sign->GetMonth() << '.' << example_sign->GetYear()
-    << '[' << example_sign->GetZodiacSign() << ']' << example_sign->GetName()  << ' ' << example_sign->GetSurname() << std::endl;
+    << '[' << example_sign->GetNameOfZodiacSign() << ']' << example_sign->GetName()  << ' ' << example_sign->GetSurname() << std::endl;
     return output;
 }
 

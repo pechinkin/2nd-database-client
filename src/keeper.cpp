@@ -228,9 +228,10 @@ void Keeper::ShowBySign()
         return;
     }
     int sign_num = 0, counter = 0;
-    std::cout << "enter a sign (0 - 12):";
+    std::cout << "0 - Aries \n1 - Taurus \n2 - Gemini \n3 - Cancer \n4 - Leo \n5 - Virgo" <<
+    "\n6 - Libra \n7 - Scorpio \n8 - Sagittarius  \n9 - Capricorn  \n10 - Aquarius  \n11 - Pisces \nEnter a sign (0 - 11):";
     std::cin >> sign_num;
-    if (sign_num < 1 || sign_num > 12) throw std::logic_error ("invalid sign");
+    if (sign_num < 0 || sign_num > 11) throw std::logic_error ("invalid sign");
     for (int i  = 0; i != size; i++) {
         if (base[i]->GetZodiacSign() == sign_num)
         {
